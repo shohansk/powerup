@@ -6,8 +6,35 @@ from rest_framework.views import APIView
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import mixins, status
+from rest_framework import viewsets
 # Create your views here.
+
+'''
+  
+  Lets do some code
+
+'''
+
+
+class ArticleViewSet(viewsets.ModelViewSet):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+
+
+
+
+'''
+
+class ArticleViewset(viewsets.GenericViewSet,mixins.ListModelMixin,mixins.CreateModelMixin ,mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+   
+
+'''
+
+'''
+ 
 
 
 def index(request):
@@ -61,6 +88,6 @@ class ArticleDetails(APIView):
         article = self.get_object(id)
         article.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
+'''
 
 
